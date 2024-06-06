@@ -5,19 +5,14 @@ from functions import * # Importing functions from functions.py
 from sqlite import *
 
 class Bot(commands.Bot): # Using the class Bot for all commands
-    async def name_from_id():
-        channelList = channels()
-        b = await bot.fetch_channels(channelList)
-        print(b)
 
     def __init__(self): # Initialise our Bot with our access token, prefix and a list of channels to join on boot
-        channelList = channels()
-        super().__init__(token='wgp2vs69qgarqssnqok0r812uhso3g', prefix='!', initial_channels=channelList) # Reading the channels to connect to from test list
+        super().__init__(token='YOUR_ACCESS_TOKEN', prefix='!', initial_channels='YOUR_TWITCH_NAME') # Reading the channels to connect to from test list
 
     async def event_ready(self):
         print(f'Logged in as | {self.nick}')
         print(f'User id is | {self.user_id}')
-        start(self.nick)
+        await bot.join_channels(channelList)
 
     async def event_command_error(self, context: commands.Context, error: Exception): # Handling errors
         if isinstance(error, commands.CommandNotFound): # Non existent command. As many other bots use the same prefix, we are just going to ignore unknown commands
@@ -117,6 +112,8 @@ class Bot(commands.Bot): # Using the class Bot for all commands
     @commands.command(name="guide") # Gives a guide to the user
     async def guide(self, ctx: commands.Context):
         await ctx.send(f'https://pastebin.com/98pQa1vK')
+
+channelList = channels()
 bot = Bot()
 
 bot.run() # Starting bot
