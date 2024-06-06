@@ -1,5 +1,9 @@
 import sqlite3
 con = sqlite3.connect("users.db")
+def start(self):
+    con.execute("CREATE TABLE IF NOT EXISTS users (username VARCHAR, groups VARCHAR, userid INT, UNIQUE(username))")
+    con.execute(f"INSERT OR IGNORE INTO users(username) VALUES({self})")
+    con.commit()
 def channels():
     users = []
     for row in con.execute("SELECT username FROM users "):
