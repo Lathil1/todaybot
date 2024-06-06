@@ -7,7 +7,7 @@ from sqlite import *
 class Bot(commands.Bot): # Using the class Bot for all commands
 
     def __init__(self): # Initialise our Bot with our access token, prefix and a list of channels to join on boot
-        super().__init__(token='YOUR_ACCESS_TOKEN', prefix='!', initial_channels='YOUR_TWITCH_NAME') # Reading the channels to connect to from test list
+        super().__init__(token='YOUR_ACCESS_TOKEN', prefix='!', initial_channels=['YOUR_TWITCH_NAME']) # Reading the channels to connect to from test list
 
     async def event_ready(self):
         print(f'Logged in as | {self.nick}')
